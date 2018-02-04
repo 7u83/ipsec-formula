@@ -1,0 +1,29 @@
+# 
+{% set ipsec = salt['grains.filter_by']({
+    'Debian': {
+       'racoon_pkg': 'racoon', 
+       'racoon_srv': 'racoon',
+       'racoon_cfg': '/etc/racoon/racoon.conf',
+       'racoon_pskfile': '/etc/racoon/psk.txt',
+       'pkg': 'ipsec-tools',
+       'cfg': '/etc/ipsec-tools.conf',
+       'srv': 'setkey',
+       'sig': False,
+       'setkeycmd':'/usr/sbin/setkey'
+
+     },
+    'FreeBSD': {
+       'racoon_pkg': 'ipsec-tools', 
+       'racoon_srv': 'racoon',
+       'racoon_cfg': '/usr/local/etc/racoon/racoon.conf',
+       'racoon_pskfile': '/usr/local/etc/racoon/psk.txt',
+       'pkg': False,
+       'srv': 'ipsec',
+       'cfg': '/etc/ipsec.conf',
+       'sig': '.*',
+       'setkeycmd':'/sbin/setkey'
+     },
+
+
+}, default='Debian') %}
+
